@@ -1,0 +1,22 @@
+{
+  "name": "vda-telkonet-room-control",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "lucide-react": "0.487.0",
+    "motion": "12.23.24",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.1.12",
+    "@vitejs/plugin-react": "4.7.0",
+    "tailwindcss": "4.1.12",
+    "typescript": "5.7.2",
+    "vite": "6.3.5"
+  }
+}
