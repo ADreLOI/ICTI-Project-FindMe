@@ -9,7 +9,7 @@ int msgCount = 0;
 void setup() {
   Serial.begin(115200);
   delay(2000);
-  WiFi.begin("Hotel_Rete_Locale", "hotel1234");
+  WiFi.begin("FINDME_DEMO_AP", "change-me-before-use");
   Serial.print("Connessione Wi-Fi...");
   while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print("."); }
   Serial.println(" ✅");

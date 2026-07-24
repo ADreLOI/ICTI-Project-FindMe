@@ -15,7 +15,7 @@ void setup() {
   Serial.println("=========================================");
 
   // 1. Accendiamo l'Antenna in modalità Access Point (Router)
-  WiFi.softAP("Hotel_Rete_Locale", "hotel1234");
+  WiFi.softAP("FINDME_DEMO_AP", "change-me-before-use");
   
   // L'indirizzo IP standard di una ESP32 in modalità SoftAP è sempre 192.168.4.1
   Serial.print("✅ Rete Wi-Fi creata! IP del Broker: ");

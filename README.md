@@ -1,74 +1,164 @@
-<div align="center">
-  # FindMe
+<a id="top"></a>
 
-  **Privacy-first true-presence detection for luxury hospitality and care environments**
+# FindMe - True Presence Detection
 
-  ![Version](https://img.shields.io/badge/version-1.0.0-0f766e?style=for-the-badge)
-  ![ESP32](https://img.shields.io/badge/ESP32-S3-000000?style=for-the-badge&logo=espressif&logoColor=white)
-  ![IoT](https://img.shields.io/badge/IoT-Sensor_Fusion-2563eb?style=for-the-badge)
-  ![Privacy](https://img.shields.io/badge/privacy-no_cameras_or_microphones-0f766e?style=for-the-badge)
+<p align="center">
+  <img src="assets/cover/findme-prototype.jpg" alt="FindMe bedside-lamp prototype and sensor enclosure" width="900" />
+</p>
 
-  **A smart-room prototype that detects true occupancy without cameras or microphones, even when a guest is sleeping or otherwise still.**
-</div>
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.0.0-2563EB?style=flat-square" alt="Version 1.0.0" />
+  <img src="https://img.shields.io/badge/course-ICT%20Innovation-0F766E?style=flat-square" alt="ICT Innovation course" />
+  <img src="https://img.shields.io/badge/partner-VDA%20Telkonet-0891B2?style=flat-square" alt="VDA Telkonet" />
+  <img src="https://img.shields.io/badge/hardware-ESP32--S3%20%7C%20ESP32-EA580C?style=flat-square" alt="ESP32 hardware" />
+</p>
+
+> A privacy-preserving, multi-sensor occupancy prototype for hospitality rooms and care environments. FindMe detects real guest presence, including quiet activities such as sleeping or reading, without cameras or microphones.
+
+<p align="center"><em>Cover: FindMe's final lamp-integrated prototype concept, created by the project team.</em></p>
+
+## Table of contents
+
+- [The problem](#the-problem)
+- [The solution](#the-solution)
+- [System architecture](#system-architecture)
+- [Evaluation](#evaluation)
+- [Repository guide](#repository-guide)
+- [Run the prototypes](#run-the-prototypes)
+- [Media and documentation](#media-and-documentation)
+- [Privacy and security](#privacy-and-security)
+- [Course and partner](#course-and-partner)
+- [Team](#team)
+- [Repository topics](#repository-topics)
 
 ## The problem
 
-Conventional hospitality presence systems depend on keycards and PIR motion sensors. They often classify a motionless guest as absent, which can cut lighting or HVAC unexpectedly; they also waste energy when a keycard is bypassed. The problem is similarly relevant in residential-care and rehabilitation settings, where staff need a trustworthy and privacy-respecting occupancy signal.
+Traditional hotel room-management systems commonly rely on keycards and PIR motion sensors. They can classify a still guest as absent, causing false negatives that affect comfort, energy management, and safety.
+
+FindMe addresses this gap for luxury hospitality, assisted living, and rehabilitation scenarios, where true presence matters even when a person is not moving.
+
+<p align="right"><a href="#top">Back to top</a></p>
 
 ## The solution
 
-FindMe packages a multi-sensor occupancy system inside an elegant bedside-lamp concept. Its local sensing and evidence-fusion pipeline combines:
+FindMe is designed as a plug-and-play bedside-lamp concept with sensing integrated in a discrete enclosure. It combines:
 
-- **24 GHz mmWave radar** to detect micro-movements such as breathing.
-- **PIR sensing** for movement events.
-- **CO2, temperature and humidity signals** for complementary room context.
-- **BLE staff badges** to distinguish staff activity from guest presence.
-- **ESP32-S3 edge processing** so raw sensing data remains in the room.
+- 24 GHz mmWave radar for micro-movements such as breathing
+- PIR sensing for motion events
+- CO2 / TVOC context from an SGP30 environmental sensor
+- BLE badges for staff and janitor context
+- ESP-NOW communication between nodes and MQTT integration with the room-management mockup
+- DOWA and Dempster-Shafer Theory fusion to combine evidence and represent uncertainty
 
-The prototype communicates its final decision to a dashboard through MQTT, with ESP-NOW used between microcontrollers. The proposed architecture applies mTLS, short-lived JWTs, MQTT QoS 1 and topic isolation.
+No camera or microphone is used.
 
-## Decision model
+<p align="right"><a href="#top">Back to top</a></p>
 
-The core of FindMe is a weighted Dempster-Shafer evidence-fusion model:
-
-1. Each sensor assigns belief to `OCCUPIED`, `EMPTY` or `UNKNOWN`.
-2. DOWA weights reflect expected sensor reliability and degrade when a sensor is unavailable or inconsistent.
-3. Dempster-Shafer combination exposes cross-sensor conflict instead of hiding it.
-4. Asymmetric hysteresis prioritises avoiding false-empty decisions, which is important when a guest may be asleep.
-
-In the final test set of 250 samples, the prototype recorded **zero false negatives** (100% recall) while making the remaining radar-clutter limitation visible in its precision and conflict metrics.
-
-## Prototype architecture
+## System architecture
 
 ```text
-Bedroom ESP32-S3: mmWave + fusion + MQTT
-         ^ ESP-NOW                     | Wi-Fi / MQTT over TLS
-         |                             v
-Entrance ESP32: PIR + BLE       Hotel dashboard / EMS-GRMS integration
-Bathroom ESP32: PIR + environmental sensors
+PIR node + BLE badge ------ ESP-NOW ------+
+                                             \
+mmWave radar + CO2 / TVOC --- UART / I2C ---- ESP32-S3 master --- MQTT --- Room-control mockup
+                                              /
+                              DOWA / DST evidence fusion
 ```
 
-## Business and deployment proposition
+The fusion model produces **Occupied**, **Empty**, or **Unknown** evidence states. Sensor weights can be reduced when a sensor is inactive or reports an error, preventing one weak input from dominating the decision.
 
-- Designed for hotel rooms, residential care and rehabilitation facilities.
-- Plug-and-play bedside-lamp form factor: no room drilling or invasive installation.
-- Target prototype bill of materials: approximately EUR70; target selling price: EUR180.
-- Validated with VDA Telkonet and the management of Best Western Hotel Adige.
+<p align="right"><a href="#top">Back to top</a></p>
 
-## Project media
+## Evaluation
 
-The project materials include a final presentation, a working demonstration, interface mock-ups, the room and hardware mock-up, and a failure-mode walkthrough. These are ideal media items for a project portfolio or LinkedIn entry.
+The final prototype evaluation used **250 samples**. It reported **zero false negatives**, **100% recall**, **71.6% precision**, **83.5% F1 score**, and **76.4% accuracy**. These results prioritise reliable presence detection, which is the core safety requirement of the concept.
 
-## Team and context
+The project was discussed with **VDA Telkonet** and demonstrated with hospitality stakeholders at **Best Western Hotel Adige**.
+
+<p align="right"><a href="#top">Back to top</a></p>
+
+## Repository guide
+
+```text
+src/                         # ESP32-S3 firmware and sensor integration
+src/tests/                   # Isolated tests for mmWave, PIR, BLE, MQTT, ESP-NOW, and fusion
+mockup/                      # Vite + React room-control interface
+Slides/                      # Project presentation material
+MOD_DOWA_Fusion_Model.pdf    # Fusion-model reference
+sessione_completa.csv        # Evaluation-session data
+platformio.ini               # ESP32-S3 PlatformIO configuration
+```
+
+<p align="right"><a href="#top">Back to top</a></p>
+
+## Run the prototypes
+
+### Firmware
+
+Install [PlatformIO](https://platformio.org/), then create a local configuration file before connecting to any network:
+
+```bash
+cp src/config.example.h src/config.h
+# Edit src/config.h with your isolated demo Wi-Fi and MQTT values.
+pio run -e esp32s3_n16r8
+pio run -e esp32s3_n16r8 -t upload
+pio device monitor -b 115200
+```
+
+`src/config.h` is ignored by Git. Never commit a Wi-Fi password, MQTT credential, room identifier, or production endpoint.
+
+### Room-control mockup
+
+```bash
+cd mockup
+cp .env.example .env
+npm install
+npm run dev
+```
+
+The mockup is a demonstrator: its technician password must be configured locally, and production authentication belongs on a server rather than in browser code.
+
+<p align="right"><a href="#top">Back to top</a></p>
+
+## Media and documentation
+
+- [DOWA fusion-model reference](./MOD_DOWA_Fusion_Model.pdf)
+- [Presentation material](./Slides)
+- Final presentation videos, including the demo, lamp hardware mockup, interface mockup, and failure-model overview, are retained with the course project material.
+
+<p align="right"><a href="#top">Back to top</a></p>
+
+## Privacy and security
+
+- The design avoids cameras and microphones.
+- Network and mockup credentials are intentionally local-only and ignored by Git.
+- The prototype's client-side UI guard is demo-only; real deployments require server-side authentication, TLS, access control, and credential rotation.
+
+<p align="right"><a href="#top">Back to top</a></p>
+
+## Course and partner
 
 Developed for the **ICT Innovation** course at the University of Trento in collaboration with **VDA Telkonet**.
 
-- Andrea Lo Iacono
-- Jago Revrenna
-- Matthew De Marco
-- Sophia Sau
-- Alessio Leonardi
+<p align="right"><a href="#top">Back to top</a></p>
 
-## Notes on the repository
+## Team
 
-This repository documents an academic prototype. It deliberately omits customer credentials, production MQTT certificates and any hotel-identifying operational data.
+**Team 7**
+
+| Member | GitHub | LinkedIn | Email |
+| --- | --- | --- | --- |
+| Andrea Lo Iacono | [ADreLOI](https://github.com/ADreLOI) | [andreloi](https://www.linkedin.com/in/adreloi) | [andrea.loiacono@studenti.unitn.it](mailto:andrea.loiacono@studenti.unitn.it) |
+| Jago Revrenna | [jagorev](https://github.com/jagorev) | [jagorevrenna](https://www.linkedin.com/in/jagorevrenna) | [jago.revrenna@studenti.unitn.it](mailto:jago.revrenna@studenti.unitn.it) |
+| Matthew De Marco | [MattDema](https://github.com/MattDema) | Profile link pending confirmation | [matthew.demarco@studenti.unitn.it](mailto:matthew.demarco@studenti.unitn.it) |
+| Sophia Sau | Profile link pending confirmation | [sophia-sau-200034348](https://www.linkedin.com/in/sophia-sau-200034348) | [sophia.sau@studenti.unitn.it](mailto:sophia.sau@studenti.unitn.it) |
+| Alessio Leonardi | Profile link pending confirmation | [alessio-leonardi2](https://www.linkedin.com/in/alessio-leonardi2) | [alessio.leonardi@studenti.unitn.it](mailto:alessio.leonardi@studenti.unitn.it) |
+
+Profile links are included only where they were already publicly provided in project material or verified from repository history; no profile has been guessed.
+
+<p align="right"><a href="#top">Back to top</a></p>
+
+## Repository topics
+
+`internet-of-things` `smart-hospitality` `occupancy-detection` `embedded-systems` `esp32` `mmwave-radar` `mqtt` `react` `vite` `privacy-by-design` `university-of-trento`
+
+<p align="right"><a href="#top">Back to top</a></p>

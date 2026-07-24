@@ -32,8 +32,8 @@ type RoomStatus = "empty" | "guest" | "staff";
 const ROOM_BG =
   "https://images.unsplash.com/photo-1533628635777-112b2239b1c7?w=1600&h=1200&fit=crop&auto=format";
 
-// Technician password (in production, this would be handled server-side)
-const TECHNICIAN_PASSWORD = "VDA2024";
+// Demo-only guard. A production deployment must authenticate on the server.
+const TECHNICIAN_PASSWORD = import.meta.env.VITE_TECHNICIAN_PASSWORD ?? "demo-only";
 
 // Per-status design tokens
 const STATUS_CONFIG = {

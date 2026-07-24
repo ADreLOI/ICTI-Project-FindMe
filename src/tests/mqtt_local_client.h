@@ -10,8 +10,8 @@
 #define TEST_TYPE 2  // <--- CAMBIA QUESTO NUMERO PER CAMBIARE TEST
 
 // Credenziali della rete creata dalla ESP Centrale
-const char* ssid = "Hotel_Rete_Locale";
-const char* password = "hotel1234";
+const char* ssid = "FINDME_DEMO_AP";
+const char* password = "change-me-before-use";
 const char* mqtt_server = "192.168.4.1"; // L'IP della ESP Centrale
 const char* topic_echo = "hotel/local/benchmark";
 

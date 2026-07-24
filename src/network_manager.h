@@ -8,11 +8,31 @@
 #include <Preferences.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "DreiPhone";         
-const char* password = "AVANTISAVOIA"; 
-const char* mqtt_server = "172.20.10.9"; 
-const char* mqtt_data_topic = "vda-telkonet/team7/room4b"; 
-const char* mqtt_setup_topic = "vda-telkonet/team7/setup";
+#if __has_include("config.h")
+#include "config.h"
+#endif
+
+#ifndef FINDME_WIFI_SSID
+#define FINDME_WIFI_SSID "YOUR_WIFI_SSID"
+#endif
+#ifndef FINDME_WIFI_PASSWORD
+#define FINDME_WIFI_PASSWORD "YOUR_WIFI_PASSWORD"
+#endif
+#ifndef FINDME_MQTT_SERVER
+#define FINDME_MQTT_SERVER "192.0.2.10"
+#endif
+#ifndef FINDME_MQTT_DATA_TOPIC
+#define FINDME_MQTT_DATA_TOPIC "findme/demo/room"
+#endif
+#ifndef FINDME_MQTT_SETUP_TOPIC
+#define FINDME_MQTT_SETUP_TOPIC "findme/demo/setup"
+#endif
+
+const char* ssid = FINDME_WIFI_SSID;
+const char* password = FINDME_WIFI_PASSWORD;
+const char* mqtt_server = FINDME_MQTT_SERVER;
+const char* mqtt_data_topic = FINDME_MQTT_DATA_TOPIC;
+const char* mqtt_setup_topic = FINDME_MQTT_SETUP_TOPIC;
 
 WiFiClient espClient;
 PubSubClient mqttClient(espClient);
