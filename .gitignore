@@ -10,3 +10,6 @@ mockup/dist/
 .vscode/ipch
 .vscode/extensions.json
 .DS_Store
+
+# Sensitive local project notes and updates
+/aggiornamenti/

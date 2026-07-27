@@ -40,6 +40,7 @@
 - [Acknowledgments](#acknowledgments)
 - [Team](#team)
 - [Repository topics](#repository-topics)
+- [License](#license)
 
 </details>
 
@@ -158,6 +159,10 @@ We also thank [**VDA Telkonet**](https://telkonet.com/) for presenting the true-
 | Matthew De Marco | [MattDema](https://github.com/MattDema) | [Matthew De Marco](https://www.linkedin.com/in/matt-de-marco/) | [matthew.demarco@studenti.unitn.it](mailto:matthew.demarco@studenti.unitn.it) |
 | Sophia Sau | Not publicly available | [Sophia Sau](https://www.linkedin.com/in/sophia-sau-200034348) | [sophia.sau@studenti.unitn.it](mailto:sophia.sau@studenti.unitn.it) |
 | Alessio Leonardi | Not publicly available | [Alessio Leonardi](https://www.linkedin.com/in/alessio-leonardi2) | [alessio.leonardi@studenti.unitn.it](mailto:alessio.leonardi@studenti.unitn.it) |
+
+## License
+
+Distributed under the **GNU General Public License v3.0 (GPL-3.0)**. See [`LICENSE`](./LICENSE) for the complete terms.
 
 <p align="center">
   <a href="#top" style="text-decoration: none;">
