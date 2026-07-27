@@ -153,17 +153,11 @@ We also thank [**VDA Telkonet**](https://telkonet.com/) for presenting the true-
 
 | Member | GitHub | LinkedIn | Email |
 | --- | --- | --- | --- |
-| Andrea Lo Iacono | [ADreLOI](https://github.com/ADreLOI) | [andreloi](https://www.linkedin.com/in/adreloi) | [andrea.loiacono@studenti.unitn.it](mailto:andrea.loiacono@studenti.unitn.it) |
-| Jago Revrenna | [jagorev](https://github.com/jagorev) | [jagorevrenna](https://www.linkedin.com/in/jagorevrenna) | [jago.revrenna@studenti.unitn.it](mailto:jago.revrenna@studenti.unitn.it) |
+| Andrea Lo Iacono | [ADreLOI](https://github.com/ADreLOI) | [Andrea Lo Iacono](https://www.linkedin.com/in/adreloi) | [andrea.loiacono@studenti.unitn.it](mailto:andrea.loiacono@studenti.unitn.it) |
+| Jago Revrenna | [jagorev](https://github.com/jagorev) | [Jago Revrenna](https://www.linkedin.com/in/jagorevrenna) | [jago.revrenna@studenti.unitn.it](mailto:jago.revrenna@studenti.unitn.it) |
 | Matthew De Marco | [MattDema](https://github.com/MattDema) | [Matthew De Marco](https://www.linkedin.com/in/matt-de-marco/) | [matthew.demarco@studenti.unitn.it](mailto:matthew.demarco@studenti.unitn.it) |
-| Sophia Sau | Not publicly available | [sophia-sau-200034348](https://www.linkedin.com/in/sophia-sau-200034348) | [sophia.sau@studenti.unitn.it](mailto:sophia.sau@studenti.unitn.it) |
-| Alessio Leonardi | Not publicly available | [alessio-leonardi2](https://www.linkedin.com/in/alessio-leonardi2) | [alessio.leonardi@studenti.unitn.it](mailto:alessio.leonardi@studenti.unitn.it) |
-
-Profile links are included only where they were already publicly provided in project material or verified from repository history; no profile has been guessed.
-
-## Repository topics
-
-`internet-of-things` `smart-hospitality` `occupancy-detection` `embedded-systems` `esp32` `mmwave-radar` `mqtt` `react` `vite` `privacy-by-design` `university-of-trento`
+| Sophia Sau | Not publicly available | [Sophia Sau](https://www.linkedin.com/in/sophia-sau-200034348) | [sophia.sau@studenti.unitn.it](mailto:sophia.sau@studenti.unitn.it) |
+| Alessio Leonardi | Not publicly available | [Alessio Leonardi](https://www.linkedin.com/in/alessio-leonardi2) | [alessio.leonardi@studenti.unitn.it](mailto:alessio.leonardi@studenti.unitn.it) |
 
 <p align="center">
   <a href="#top" style="text-decoration: none;">
