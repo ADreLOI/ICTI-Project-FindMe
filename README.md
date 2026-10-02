@@ -77,7 +77,9 @@ The fusion model produces **Occupied**, **Empty**, or **Unknown** evidence state
 
 ## Evaluation
 
-The final prototype evaluation used **250 samples**. It reported **zero false negatives**, **100% recall**, **71.6% precision**, **83.5% F1 score**, and **76.4% accuracy**. These results prioritise reliable presence detection, which is the core safety requirement of the concept.
+The **final presentation's 250-sample evaluation** reports **149 true positives, 42 true negatives, 59 false positives and zero false negatives**: **100% recall**, **71.6% precision**, **83.5% F1** and **76.4% accuracy**. This is a prototype test result, not a guarantee for every room or deployment. Radar clutter contributed to false positives.
+
+The stored `sessione_completa.csv` contains a different logging session with different cumulative counts; it is not the source of the 250-sample presentation summary. Keep the evaluation session and sample count attached to any reported metric.
 
 The project was discussed with **VDA Telkonet** and demonstrated with hospitality stakeholders at **Best Western Hotel Adige**.
 
